@@ -34,7 +34,7 @@ public class JsonStatisticsController {
         try {
             exchangeRateStatisticsService.validateRequestById(exRateRequest.getRequestId());
             exchangeRateStatisticsService.createExRateRequestRecord(exRateRequest);
-            rabbitmqSender.sendJsonRequestMessage(exRateRequest);
+            rabbitmqSender.sendRequestMessage(exRateRequest);
             CurrencyResponseLatest responseLatest = exchangeRateStatisticsService.getLatestRatesDataFor(exRateRequest.getCurrency());
             return ResponseEntity.ok(responseLatest);
         } catch (Exception ex) {
@@ -48,6 +48,7 @@ public class JsonStatisticsController {
         try {
             exchangeRateStatisticsService.validateRequestById(exRateRequest.getRequestId());
             exchangeRateStatisticsService.createExRateRequestRecord(exRateRequest);
+            rabbitmqSender.sendRequestMessage(exRateRequest);
             CurrencyResponseHistory responseHistory = exchangeRateStatisticsService.getHistoryRatesDataFor(exRateRequest.getCurrency(), exRateRequest.getPeriod());
             return ResponseEntity.ok(responseHistory);
         } catch (Exception ex) {
