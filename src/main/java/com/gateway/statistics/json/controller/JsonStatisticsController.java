@@ -1,7 +1,8 @@
 package com.gateway.statistics.json.controller;
 
-import com.gateway.statistics.json.model.CurrencyRequestLatest;
+import com.gateway.statistics.json.model.CurrencyResponseHistory;
 import com.gateway.statistics.json.model.CurrencyResponseLatest;
+import com.gateway.statistics.json.model.JsonCurrencyRequest;
 import com.gateway.statistics.json.service.ExchangeRateStatisticsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class JsonStatisticsController {
     }
 
     @PostMapping(value = "/current", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<CurrencyResponseLatest> getCurrentStatistics(HttpServletRequest req, @RequestBody CurrencyRequestLatest exRateRequest) {
+    public ResponseEntity<CurrencyResponseLatest> getCurrentStatistics(HttpServletRequest req, @RequestBody JsonCurrencyRequest exRateRequest) {
         try {
             exchangeRateStatisticsService.validateRequestById(exRateRequest.getRequestId());
             exchangeRateStatisticsService.createExRateRequestRecord(exRateRequest);
@@ -38,8 +39,11 @@ public class JsonStatisticsController {
         return ResponseEntity.ok(new CurrencyResponseLatest());
     }
 
-    @PostMapping("/history")
-    public void getHistoryStatistics() {
-
+    @PostMapping(value = "/history", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<CurrencyResponseHistory> getHistoryStatistics(HttpServletRequest req, @RequestBody JsonCurrencyRequest exRateRequest) {
+        exchangeRateStatisticsService.validateRequestById(exRateRequest.getRequestId());
+        exchangeRateStatisticsService.createExRateRequestRecord(exRateRequest);
+        CurrencyResponseHistory responseHistory = exchangeRateStatisticsService.getHistoryRatesDataFor(exRateRequest.getCurrency(), exRateRequest.getPeriod());
+        return ResponseEntity.ok(responseHistory);
     }
 }

@@ -2,13 +2,14 @@ package com.gateway.statistics.json.model;
 
 import java.util.UUID;
 
-public class CurrencyRequestLatest {
+public class JsonCurrencyRequest {
 
     private UUID requestId;
     private String serviceName;
     private Long timestamp;
     private int client;
     private String currency;
+    private int period;
 
     public UUID getRequestId() {
         return requestId;
@@ -48,5 +49,13 @@ public class CurrencyRequestLatest {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public int getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
     }
 }

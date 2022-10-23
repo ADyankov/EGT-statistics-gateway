@@ -1,6 +1,6 @@
 package com.gateway.statistics.json.entity;
 
-import com.gateway.statistics.json.model.CurrencyRequestLatest;
+import com.gateway.statistics.json.model.JsonCurrencyRequest;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
@@ -15,7 +15,7 @@ public class CurrencyRequestEntity {
 
     public CurrencyRequestEntity() {}
 
-    public CurrencyRequestEntity(CurrencyRequestLatest exRate) {
+    public CurrencyRequestEntity(JsonCurrencyRequest exRate) {
         this.id = exRate.getRequestId();
         this.serviceName = exRate.getServiceName();
         this.timestamp = exRate.getTimestamp();
