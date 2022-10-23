@@ -1,5 +1,6 @@
 spring:
   jpa:
+    generate-ddl: true
     database: POSTGRESQL
     show-sql: true
     hibernate:
@@ -10,3 +11,17 @@ spring:
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
+
+  rabbitmq:
+    addresses: localhost:5672
+    username: rabbitmq
+    password: rabbitmq
+    virtual-host: /
+    ssl:
+      enabled: false
+
+statistics:
+  rabbitmq:
+    exchangeName: "request.exchange"
+    queueName: "request.queue"
+    routingKey: "key"

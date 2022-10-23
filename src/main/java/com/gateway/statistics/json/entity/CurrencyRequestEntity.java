@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "currency_request", schema = "exchange_rates")
+@Table(name = "currency_request")
 public class CurrencyRequestEntity {
 
     public CurrencyRequestEntity() {}
